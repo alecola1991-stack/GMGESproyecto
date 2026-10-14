@@ -1,4 +1,4 @@
-# AulaControl — Gestión Administrativa · Cádiz 2026/2027
+# GM GES - Control de horas — Gestión Administrativa · Cádiz 2026/2027
 
 Web estática para gestionar el horario de Grado Medio de Gestión Administrativa y controlar el umbral de faltas del 20 % por asignatura.
 
