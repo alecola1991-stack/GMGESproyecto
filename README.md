@@ -18,7 +18,7 @@ También puedes abrir `index.html` directamente en el navegador sin servidor.
 - Cálculo automático del total de horas de cada módulo y del máximo de faltas según la regla configurada.
 - Registro de faltas, eliminación, copia de seguridad JSON e importación.
 - Festivos locales y días no lectivos adicionales configurables.
-- Modo local sin cuenta e inicio de sesión con Supabase para sincronizar datos privados entre dispositivos.
+- Registro e inicio de sesión obligatorios con Supabase para sincronizar datos privados entre dispositivos.
 
 ## Criterio de cálculo
 
@@ -34,11 +34,11 @@ Fuente: [Calendario escolar 2026/27, FSIE Cádiz](https://fsieandalucia.es/docum
 
 ## Cuenta y guardado en la nube
 
-Pulsa **Iniciar sesión / Crear cuenta**. Las cuentas nuevas requieren confirmar el correo. Si ya usas una cuenta en este mismo proyecto de Supabase, puedes entrar con ella.
+La primera pantalla permite **Entrar** o **Crear cuenta**. Las cuentas nuevas requieren confirmar el correo. Si ya usas una cuenta en este mismo proyecto de Supabase, puedes entrar con ella.
 
 Se sincronizan faltas, días no lectivos añadidos, porcentaje y regla de asistencia, tema y preferencias de recordatorio. El permiso de notificaciones pertenece a cada dispositivo.
 
-Los datos anteriores del navegador no se suben automáticamente: tras entrar, pulsa **Copiar los datos de este navegador a mi cuenta**. Esa acción reemplaza los datos de la cuenta y pide confirmación. Sin sesión se mantiene el modo local.
+Los datos anteriores del navegador no se suben automáticamente: tras entrar, pulsa **Copiar los datos de este navegador a mi cuenta**. Esa acción reemplaza los datos de la cuenta y pide confirmación. Sin sesión, la aplicación muestra únicamente la pantalla de acceso.
 
 Tabla dedicada: `public.gm_ges_user_data`. RLS limita lectura y escritura al propietario mediante `auth.uid() = user_id`. El cliente utiliza una clave publicable; no hay claves secretas en el repositorio. El control de versiones detecta cambios de otro dispositivo y evita sobrescribirlos. Los cambios pendientes se conservan localmente y se reintentan al recuperar la conexión.
 
@@ -54,3 +54,10 @@ La configuración de Auth del proyecto debe incluir `https://alecola1991-stack.g
 Cada módulo con libro facilitado tiene un enlace **Abrir libro** al PDF original en Drive. Se han comprobado los siete enlaces sin iniciar sesión.
 
 Al iniciar sesión se ofrece elegir los módulos que cursas. La selección se guarda en tu cuenta y también se puede cambiar desde **Ajustes → Mis asignaturas** o con **Excluir de mis asignaturas** en una tarjeta. Los módulos excluidos no cuentan en las horas, faltas y días restantes de tu selección; sus clases se muestran como libres en el horario. Las faltas históricas se conservan y vuelven a mostrarse al reactivar el módulo. La selección se incluye en las copias JSON y en la sincronización con Supabase.
+
+
+## Acceso obligatorio y ayuda
+
+La interfaz se bloquea inicialmente y solo se habilita después de verificar la sesión con Supabase Auth. Al cerrar sesión vuelve a la pantalla de acceso. Los datos privados siguen protegidos por las políticas RLS de la base de datos.
+
+**Ajustes → Preguntas y respuestas** contiene una guía de registro, faltas, cálculo de horas, asignaturas convalidadas, libros, exámenes, calendario, sincronización, copias y notificaciones.
