@@ -1,4 +1,4 @@
-name: Publicar AulaControl en GitHub Pages
+name: Publicar GM GES - Control de horas en GitHub Pages
 
 on:
   push:
