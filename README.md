@@ -47,3 +47,10 @@ La configuración de Auth del proyecto debe incluir `https://alecola1991-stack.g
 ## Cómo influye la fecha actual
 
 «Puedes faltar aún» es el margen del límite anual: máximo permitido menos las faltas anotadas. No disminuye por el mero paso del tiempo. «Días lectivos restantes» sí utiliza la fecha actual. El margen no asegura que queden suficientes clases para consumirlo al final del curso.
+
+
+## Libros y asignaturas personales
+
+Cada módulo con libro facilitado tiene un enlace **Abrir libro** al PDF original en Drive. Se han comprobado los siete enlaces sin iniciar sesión.
+
+Al iniciar sesión se ofrece elegir los módulos que cursas. La selección se guarda en tu cuenta y también se puede cambiar desde **Ajustes → Mis asignaturas** o con **Excluir de mis asignaturas** en una tarjeta. Los módulos excluidos no cuentan en las horas, faltas y días restantes de tu selección; sus clases se muestran como libres en el horario. Las faltas históricas se conservan y vuelven a mostrarse al reactivar el módulo. La selección se incluye en las copias JSON y en la sincronización con Supabase.
