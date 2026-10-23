@@ -35,6 +35,18 @@ function authMessage(e){
  if(/refresh token|session.*missing|expired|invalid.*token/i.test(e?.message||''))return 'Tu sesión o enlace ha caducado. Inicia sesión de nuevo o solicita otro enlace.';
  return e?.message||'No se pudo completar el acceso. Inténtalo de nuevo.';
 }
+
+const googleButton=document.getElementById('googleLogin');
+if(googleButton)googleButton.onclick=async()=>{
+ const buttons=[...form.querySelectorAll('button')];buttons.forEach(b=>b.disabled=true);
+ status.textContent='Abriendo el acceso con Google…';
+ try{
+  const {error}=await client.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin+location.pathname,queryParams:{prompt:'select_account'}}});
+  if(error)throw error;
+ }catch(e){status.textContent=authMessage(e);buttons.forEach(b=>b.disabled=false)}
+};
+window.addEventListener('pageshow',()=>{if(googleButton)googleButton.disabled=false});
+
 const passwordField=document.getElementById('accountPassword');
 passwordField.minLength=1;
 const helpers=document.createElement('div');helpers.className='controls';helpers.style.marginTop='12px';
@@ -60,7 +72,7 @@ document.getElementById('cancelReset').onclick=()=>recovery.close();
 document.getElementById('resetPasswordForm').onsubmit=async e=>{e.preventDefault();const p=document.getElementById('newAccountPassword'),repeat=document.getElementById('repeatAccountPassword'),message=document.getElementById('resetStatus'),button=e.target.querySelector('[type=submit]');if(p.value!==repeat.value){message.textContent='Las contraseñas no coinciden.';return}button.disabled=true;try{const {error}=await client.auth.updateUser({password:p.value});if(error)throw error;p.value='';repeat.value='';recovery.close();status.textContent='Contraseña actualizada. Ya puedes usar tu cuenta.'}catch(e){message.textContent=authMessage(e)}finally{button.disabled=false}};
 let authRevision=0;
 client.auth.onAuthStateChange((event,session)=>{authRevision++;setTimeout(()=>{if(event==='PASSWORD_RECOVERY'&&!recovery.open)recovery.showModal();scheduleSession(session,event==='SIGNED_IN')},0)});
-const urlError=new URLSearchParams(location.hash.slice(1)).get('error_description');
+const urlError=new URLSearchParams(location.hash.slice(1)).get('error_description')||new URLSearchParams(location.search).get('error_description');
 const initialRevision=authRevision;
-client.auth.getSession().then(async({data,error})=>{if(authRevision!==initialRevision)return;if(error){await scheduleSession(null);status.textContent=authMessage(error)}else{await scheduleSession(data.session);if(urlError)status.textContent='El enlace no es válido o ha caducado. Solicita otro correo de confirmación o recuperación.'}}).catch(e=>{status.textContent=authMessage(e);form.classList.remove('hide')});
+client.auth.getSession().then(async({data,error})=>{if(authRevision!==initialRevision)return;if(error){await scheduleSession(null);status.textContent=authMessage(error)}else{await scheduleSession(data.session);if(urlError)status.textContent='No se pudo completar el acceso. Si cancelaste Google, vuelve a intentarlo; si usaste un enlace de correo, solicita uno nuevo.'}}).catch(e=>{status.textContent=authMessage(e);form.classList.remove('hide')});
 })();
