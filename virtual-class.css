@@ -50,3 +50,15 @@
 @keyframes lj-confetti{0%{opacity:0;transform:translateY(0) rotate(0)}15%{opacity:1}100%{opacity:0;transform:translateY(-200px) rotate(240deg)}}
 @media(max-width:700px){.lj-welcome{padding:16px;gap:10px}.lj-welcome h2{font-size:23px}.lj-mascot{width:78px;min-width:65px;height:90px}.lj-step{padding-left:5px;padding-right:5px}.lj-step.lj-offset{padding-left:35px}.lj-step:before{left:42px}.lj-step.lj-offset:before{left:72px}.lj-exercise{padding:18px}.lj-session-head{padding:10px 0}.lj-node{width:70px;height:68px}.lj-finish h2{font-size:25px}}
 @media(prefers-reduced-motion:reduce){#virtualClassRoot *,#virtualClassRoot *:before,#virtualClassRoot *:after{animation:none!important;transition:none!important}.lj-confetti{display:none}}
+
+#virtualClassRoot .vc-table-scroll{overflow-x:auto;margin:18px 0;border:1px solid var(--stroke);border-radius:14px}
+#virtualClassRoot .vc-fill-table{width:100%;min-width:760px;border-collapse:collapse;text-align:left}
+#virtualClassRoot .vc-fill-table caption{text-align:left;padding:12px;font-weight:700;background:var(--surface2)}
+#virtualClassRoot .vc-fill-table th,#virtualClassRoot .vc-fill-table td{padding:12px;border-bottom:1px solid var(--stroke);vertical-align:top}
+#virtualClassRoot .vc-fill-table th{background:var(--surface2);font-size:12px}
+#virtualClassRoot .vc-fill-table select,#virtualClassRoot .vc-fill-table input{width:100%;min-height:46px;border:1px solid var(--stroke);border-radius:9px;background:var(--surface);color:var(--txt);padding:9px;font:inherit}
+#virtualClassRoot .vc-fill-table td:first-child{min-width:260px}
+#virtualClassRoot .vc-fill-table td:last-child{min-width:120px}
+#virtualClassRoot .vc-convention{display:grid;gap:8px}
+#virtualClassRoot [data-table-input][aria-invalid=true]{border:2px solid var(--red)}
+@media(max-width:700px){#virtualClassRoot .vc-fill-table{min-width:0}#virtualClassRoot .vc-fill-table thead{display:none}#virtualClassRoot .vc-fill-table tbody,#virtualClassRoot .vc-fill-table tr,#virtualClassRoot .vc-fill-table td{display:block}#virtualClassRoot .vc-fill-table tr{padding:8px;border-bottom:2px solid var(--stroke)}#virtualClassRoot .vc-fill-table td{border:0;min-width:0!important;padding:7px}#virtualClassRoot .vc-fill-table td:before{display:block;font-size:12px;font-weight:700;margin-bottom:5px}#virtualClassRoot .vc-fill-table td:nth-child(1):before{content:'Cuenta que interviene'}#virtualClassRoot .vc-fill-table td:nth-child(2):before{content:'Masa patrimonial'}#virtualClassRoot .vc-fill-table td:nth-child(3):before{content:'Variación y Debe / Haber'}#virtualClassRoot .vc-fill-table td:nth-child(4):before{content:'Importe (€)'}#virtualClassRoot .vc-convention{grid-template-columns:1fr 1fr}}
